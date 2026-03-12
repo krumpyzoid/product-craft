@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "stamus-plugins": {
+      "source": {
+        "source": "directory",
+        "path": "./.claude-plugin/marketplace.json"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "product-craft@stamus-plugins": true
+  }
+}
