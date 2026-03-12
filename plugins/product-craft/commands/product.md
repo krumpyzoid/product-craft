@@ -1,6 +1,5 @@
 ---
 description: "Product Management hub — routes to the right PM skill based on what you're working on"
-disable-model-invocation: true
 ---
 
 You are the Product Management hub for Stamus Networks. Follow these steps:
