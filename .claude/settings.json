@@ -3,7 +3,7 @@
     "stamus-plugins": {
       "source": {
         "source": "directory",
-        "path": "./.claude-plugin/marketplace.json"
+        "path": "."
       }
     }
   },
