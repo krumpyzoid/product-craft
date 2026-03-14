@@ -1,6 +1,6 @@
 {
   "extraKnownMarketplaces": {
-    "stamus-plugins": {
+    "local-plugins": {
       "source": {
         "source": "directory",
         "path": "."
@@ -8,6 +8,6 @@
     }
   },
   "enabledPlugins": {
-    "product-craft@stamus-plugins": true
+    "product-craft@local-plugins": true
   }
 }

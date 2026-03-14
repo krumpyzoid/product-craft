@@ -2,7 +2,7 @@
 
 ## Overview
 
-A Claude Code plugin called **product-craft** that provides Product Management skills for Stamus Networks. It fills the gap of missing PM culture by forcing problem-first, user-centric thinking across competitor analysis, market research, discovery, request evaluation, user stories, Shape Up bet shaping, product strategy, and persona management.
+A Claude Code plugin called **product-craft** that provides Product Management skills for engineering-led teams. It fills the gap of missing PM culture by forcing problem-first, user-centric thinking across competitor analysis, market research, discovery, request evaluation, user stories, Shape Up bet shaping, product strategy, and persona management.
 
 The plugin targets an engineering-led team adopting Shape Up, where bets tend to be too technical, user needs are underexplored, and the team jumps to solutions before identifying problems.
 
@@ -54,7 +54,7 @@ product-craft/
   "description": "Product Management skills for Shape Up teams: discovery, competitor analysis, bet shaping, user stories, and product strategy",
   "version": "0.1.0",
   "author": {
-    "name": "Stamus Networks"
+    "name": "Product Craft"
   }
 }
 ```

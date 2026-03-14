@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build the product-craft Claude Code plugin — a suite of PM skills for Stamus Networks' Shape Up workflow.
+**Goal:** Build the product-craft Claude Code plugin — a suite of PM skills for Shape Up workflows.
 
 **Architecture:** A single plugin at `plugins/product-craft/` containing 8 skills, 9 commands, 2 agents, and 2 reference docs. Skills are markdown prompt files that guide conversational PM workflows. Artifacts are written to `docs/` in the project repo.
 
@@ -48,7 +48,7 @@ Write `plugins/product-craft/.claude-plugin/plugin.json`:
   "description": "Product Management skills for Shape Up teams: discovery, competitor analysis, bet shaping, user stories, and product strategy",
   "version": "0.1.0",
   "author": {
-    "name": "Stamus Networks"
+    "name": "Product Craft"
   }
 }
 ```
@@ -60,9 +60,9 @@ This allows Claude Code to discover the plugin from within the repo.
 Write `.claude-plugin/marketplace.json`:
 ```json
 {
-  "name": "stamus-plugins",
+  "name": "local-plugins",
   "owner": {
-    "name": "Stamus Networks"
+    "name": "Product Craft"
   },
   "plugins": [
     {
@@ -86,7 +86,7 @@ Write `.claude/settings.json`:
 ```json
 {
   "extraKnownMarketplaces": {
-    "stamus-plugins": {
+    "local-plugins": {
       "source": {
         "source": "directory",
         "path": "./.claude-plugin/marketplace.json"
@@ -94,7 +94,7 @@ Write `.claude/settings.json`:
     }
   },
   "enabledPlugins": {
-    "product-craft@stamus-plugins": true
+    "product-craft@local-plugins": true
   }
 }
 ```
@@ -340,7 +340,7 @@ color: green
 
 # Market Researcher Agent
 
-You are a market research assistant for Stamus Networks, a network security company that builds Clear NDR (Network Detection and Response). You are dispatched by product-craft skills to gather external information.
+You are a market research assistant dispatched by product-craft skills to gather external information.
 
 ## Your Role
 
@@ -419,11 +419,11 @@ color: yellow
 
 # Bet Reviewer Agent
 
-You are a product management coach reviewing a shaped pitch for Stamus Networks. Your job is to catch common pitfalls that engineering-led teams fall into when shaping bets.
+You are a product management coach reviewing a shaped pitch. Your job is to catch common pitfalls that engineering-led teams fall into when shaping bets.
 
 ## Context
 
-Stamus Networks builds Clear NDR (Network Detection and Response), a network security product. The team is adopting Shape Up and tends to:
+The team is adopting Shape Up and tends to:
 - Frame bets in technical terms instead of user terms
 - Skip evidence gathering
 - Jump to solutions before understanding problems
@@ -538,7 +538,7 @@ description: Create, maintain, and reference user personas grounded in real data
 
 # Personas
 
-Create, maintain, and reference user personas for Stamus Networks' Clear NDR product. Personas are grounded in real data — web research on the role combined with internal knowledge from the user.
+Create, maintain, and reference user personas for your product. Personas are grounded in real data — web research on the role combined with internal knowledge from the user.
 
 ## Context Loading
 
@@ -654,7 +654,7 @@ description: Build and maintain deep competitor profiles with web research and i
 
 # Competitor Analysis
 
-Build and maintain deep competitor profiles for Stamus Networks. Combines web research with internal knowledge from sales, support, and customer conversations.
+Build and maintain deep competitor profiles. Combines web research with internal knowledge from sales, support, and customer conversations.
 
 ## Context Loading
 
@@ -728,7 +728,7 @@ Write the profile to `docs/competitors/<competitor-slug>.md`:
 - [What customers complain about]
 
 ## How they position against us
-[How they differentiate from Stamus/Clear NDR in their messaging]
+[How they differentiate from us in their messaging]
 
 ## How we win against them
 - [Competitive advantage 1]
@@ -980,7 +980,7 @@ Be persistent but not obnoxious. If the user gives a clear problem statement, do
 If the problem area has broader industry relevance, dispatch the **market-researcher agent**:
 
 Use the Agent tool with `subagent_type: "product-craft:market-researcher"` and a prompt like:
-> "Research whether [problem area] is a recognized pain point in the NDR/SOC space. Look for: industry surveys mentioning this pain point, vendor solutions addressing it, analyst commentary, community discussions (Reddit, security forums). Is this a Stamus-specific gap or an industry-wide challenge?"
+> "Research whether [problem area] is a recognized pain point in the NDR/SOC space. Look for: industry surveys mentioning this pain point, vendor solutions addressing it, analyst commentary, community discussions (Reddit, security forums). Is this specific to our product or an industry-wide challenge?"
 
 If the agent reports that web tools are unavailable, ask the user directly: *"I couldn't research this online. Is this a well-known pain point in the industry, or something more specific to your users? What have you heard from customers, peers, or at conferences?"*
 
@@ -1037,7 +1037,7 @@ Write to `docs/research/discovery-YYYY-MM-DD-<topic-slug>.md`:
 **Total: [sum]/20**
 
 ## What happens if we don't solve this
-[Consequences for users and for Stamus Networks]
+[Consequences for users and for the business]
 
 ## Recommended next step
 <!-- One of: -->
@@ -1676,7 +1676,7 @@ description: "Product Management hub — routes to the right PM skill based on w
 disable-model-invocation: true
 ---
 
-You are the Product Management hub for Stamus Networks. Follow these steps:
+You are the Product Management hub. Follow these steps:
 
 1. Read `docs/personas/`, `docs/competitors/`, `docs/pitches/`, `docs/research/`, and `docs/strategy/` to understand what artifacts exist.
 2. Present a brief status summary to the user: how many personas, competitor profiles, pitches (by status), research briefs exist, and when each area was last updated.
@@ -1832,7 +1832,7 @@ cat .claude-plugin/marketplace.json
 cat .claude/settings.json
 ```
 
-Confirm that `.claude/settings.json` has `"product-craft@stamus-plugins": true` in `enabledPlugins`.
+Confirm that `.claude/settings.json` has `"product-craft@local-plugins": true` in `enabledPlugins`.
 
 If auto-discovery doesn't work in your Claude Code version, install manually:
 ```bash

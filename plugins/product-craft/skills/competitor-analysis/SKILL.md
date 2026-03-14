@@ -5,7 +5,7 @@ description: Build and maintain deep competitor profiles with web research and i
 
 # Competitor Analysis
 
-Build and maintain deep competitor profiles for Stamus Networks. Combines web research with internal knowledge from sales, support, and customer conversations.
+Build and maintain deep competitor profiles. Combines web research with internal knowledge from sales, support, and customer conversations.
 
 ## Context Loading
 
@@ -79,7 +79,7 @@ Write the profile to `docs/competitors/<competitor-slug>.md`:
 - [What customers complain about]
 
 ## How they position against us
-[How they differentiate from Stamus/Clear NDR in their messaging]
+[How they differentiate from us in their messaging]
 
 ## How we win against them
 - [Competitive advantage 1]

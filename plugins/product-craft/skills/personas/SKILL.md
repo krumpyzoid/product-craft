@@ -5,7 +5,7 @@ description: Create, maintain, and reference user personas grounded in real data
 
 # Personas
 
-Create, maintain, and reference user personas for Stamus Networks' Clear NDR product. Personas are grounded in real data — web research on the role combined with internal knowledge from the user.
+Create, maintain, and reference user personas for your product. Personas are grounded in real data — web research on the role combined with internal knowledge from the user.
 
 ## Context Loading
 

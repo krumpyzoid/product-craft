@@ -61,7 +61,7 @@ Be persistent but not obnoxious. If the user gives a clear problem statement, do
 If the problem area has broader industry relevance, dispatch the **market-researcher agent**:
 
 Use the Agent tool with `subagent_type: "product-craft:market-researcher"` and a prompt like:
-> "Research whether [problem area] is a recognized pain point in the NDR/SOC space. Look for: industry surveys mentioning this pain point, vendor solutions addressing it, analyst commentary, community discussions (Reddit, security forums). Is this a Stamus-specific gap or an industry-wide challenge?"
+> "Research whether [problem area] is a recognized pain point in the NDR/SOC space. Look for: industry surveys mentioning this pain point, vendor solutions addressing it, analyst commentary, community discussions (Reddit, security forums). Is this specific to our product or an industry-wide challenge?"
 
 If the agent reports that web tools are unavailable, ask the user directly: *"I couldn't research this online. Is this a well-known pain point in the industry, or something more specific to your users? What have you heard from customers, peers, or at conferences?"*
 
@@ -118,7 +118,7 @@ Write to `docs/research/discovery-YYYY-MM-DD-<topic-slug>.md`:
 **Total: [sum]/20**
 
 ## What happens if we don't solve this
-[Consequences for users and for Stamus Networks]
+[Consequences for users and for the business]
 
 ## Recommended next step
 <!-- One of: -->

@@ -1,10 +1,10 @@
-# Stamus Product Craft
+# Product Craft
 
-A Claude Code plugin and shared workspace for Product Management at Stamus Networks. Built around Shape Up methodology, it provides AI-assisted skills for discovery, competitor analysis, bet shaping, user stories, and product strategy.
+A Claude Code plugin and shared workspace for Product Management. Built around Shape Up methodology, it provides AI-assisted skills for discovery, competitor analysis, bet shaping, user stories, and product strategy.
 
 ## Why this exists
 
-We're an engineering-led team building [Clear NDR](https://www.stamus-networks.com/), a Network Detection and Response product. We tend to jump to solutions before understanding problems, frame work in technical terms instead of user impact, and lack a formal PM function. This repo fills that gap.
+Engineering-led teams tend to jump to solutions before understanding problems, frame work in technical terms instead of user impact, and lack a formal PM function. This plugin fills that gap.
 
 ## Getting started
 
@@ -19,7 +19,7 @@ We're an engineering-led team building [Clear NDR](https://www.stamus-networks.c
 |---------|-------------|
 | `/product` | Hub — shows status of all artifacts and routes you to the right skill |
 | `/personas` | Create and maintain user personas grounded in real data |
-| `/competitor-analysis` | Build deep competitor profiles (Darktrace, Vectra, Corelight, etc.) |
+| `/competitor-analysis` | Build deep competitor profiles |
 | `/market-research` | Research industry trends and market dynamics |
 | `/discovery` | Validate whether a problem is real, worth solving, and for whom |
 | `/evaluate-request` | Assess whether a customer request or idea deserves attention |

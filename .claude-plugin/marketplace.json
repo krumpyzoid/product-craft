@@ -1,7 +1,7 @@
 {
-  "name": "stamus-plugins",
+  "name": "local-plugins",
   "owner": {
-    "name": "Stamus Networks"
+    "name": "Mathias Kurz"
   },
   "plugins": [
     {
