@@ -1,13 +1,5 @@
 {
-  "extraKnownMarketplaces": {
-    "local-plugins": {
-      "source": {
-        "source": "directory",
-        "path": "."
-      }
-    }
-  },
   "enabledPlugins": {
-    "product-craft@local-plugins": true
+    "product-craft@product-craft": true
   }
 }

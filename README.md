@@ -6,12 +6,31 @@ A Claude Code plugin and shared workspace for Product Management. Built around S
 
 Engineering-led teams tend to jump to solutions before understanding problems, frame work in technical terms instead of user impact, and lack a formal PM function. This plugin fills that gap.
 
+## Installation
+
+Install the plugin from GitHub into any project:
+
+```
+/plugin marketplace add krumpyzoid/product-craft
+/plugin install product-craft@product-craft
+```
+
+That's it. The plugin's skills and commands are now available in your project.
+
+### Alternative: clone as a workspace
+
+If you want a standalone product workspace (with the `docs/` directory for artifacts):
+
+```bash
+git clone https://github.com/krumpyzoid/product-craft.git
+cd product-craft
+```
+
+Open it in [Claude Code](https://docs.anthropic.com/en/docs/claude-code) and the plugin loads automatically.
+
 ## Getting started
 
-1. Clone this repo
-2. Open the directory in [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
-3. The `product-craft` plugin loads automatically
-4. Run `/product` to see the hub, or use any command directly
+Run `/product` to see the hub, or use any command directly.
 
 ## Commands
 
