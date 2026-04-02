@@ -43,7 +43,7 @@ Artifact types map to config categories:
 When any skill starts and no `product-craft.json` exists:
 
 Tell the user:
-> "Product Craft hasn't been configured yet. Would you like to set up where artifacts are stored? (Run `/product init` for full setup, or I can use local markdown files in `docs/` as the default.)"
+> "Product Craft hasn't been configured yet. Would you like to set up where artifacts are stored? (Run `/product setup` for full setup, or I can use local markdown files in `docs/` as the default.)"
 
 If the user picks the quick default, write this to `product-craft.json`:
 
@@ -60,7 +60,7 @@ If the user picks the quick default, write this to `product-craft.json`:
 
 Then create the directory structure `{basePath}/personas/`, `{basePath}/competitors/`, `{basePath}/pitches/`, `{basePath}/pitches/stories/`, `{basePath}/research/`, `{basePath}/strategy/`, `{basePath}/company/` with `.gitkeep` files, and continue with the skill.
 
-If the user wants full setup, invoke the `product-craft:init` command skill and wait for it to complete before continuing.
+If the user wants full setup, invoke the `product-craft:setup` command skill and wait for it to complete before continuing.
 
 ## Artifact Block Format
 

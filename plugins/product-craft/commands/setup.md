@@ -21,7 +21,7 @@ Present findings:
 > "I see these MCP servers connected: [list with descriptions]. Any of these can be used as artifact destinations."
 
 If no MCP servers are found:
-> "No MCP servers detected. I'll set up local file storage. You can reconfigure later with `/product init` after connecting MCP servers."
+> "No MCP servers detected. I'll set up local file storage. You can reconfigure later with `/product setup` after connecting MCP servers."
 
 ### Step 3: Set default destination
 
@@ -114,4 +114,4 @@ Summarize the configuration:
 > - Default: [destination]
 > - [Category overrides if any]
 >
-> Config saved to `product-craft.json`. Run `/product init` anytime to reconfigure."
+> Config saved to `product-craft.json`. Run `/product setup` anytime to reconfigure."
