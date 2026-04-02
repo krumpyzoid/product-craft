@@ -23,7 +23,7 @@ This is the canonical pitch format for product-craft. The `/shape-bet` skill use
   Include evidence: customer quotes, support tickets, data, competitive pressure. -->
 
 ## Personas affected
-<!-- Link to persona files in docs/personas/.
+<!-- Reference personas using [REF persona:<slug>] notation.
   Be specific — which personas and why. -->
 
 ## Appetite
@@ -71,7 +71,7 @@ This is the canonical pitch format for product-craft. The `/shape-bet` skill use
 <!-- What makes us believe this is worth betting on?
   Customer conversations, support ticket patterns, usage data,
   competitor analysis, discovery briefs.
-  Link to relevant docs in docs/research/ and docs/competitors/. -->
+  Reference relevant artifacts using [REF research:<slug>] and [REF competitor:<slug>] notation. -->
 
 ## Last updated: YYYY-MM-DD
 ```

@@ -21,12 +21,13 @@ The team is adopting Shape Up and tends to:
 
 ## Review Process
 
-1. Read the pitch file provided to you
-2. Read the referenced persona files in `docs/personas/` (if they exist)
-3. Read any referenced discovery briefs or evaluations in `docs/research/` (if they exist)
-4. Read `plugins/product-craft/references/shape-up-primer.md` for methodology reference
-5. Read `plugins/product-craft/references/pitch-template.md` for expected structure
-6. Evaluate against the checklist below
+1. Read the pitch provided to you (the parent skill will share its content or location)
+2. Read `product-craft.json` from the project root to understand where artifacts are stored
+3. Use the output layer conventions to read any referenced persona artifacts (from `[REF persona:slug]` in the pitch)
+4. Use the output layer conventions to read any referenced research artifacts (from `[REF research:slug]` or `[REF discovery:slug]` in the pitch)
+5. Read the plugin's `references/shape-up-primer.md` for methodology reference
+6. Read the plugin's `references/pitch-template.md` for expected structure
+7. Evaluate against the checklist below
 
 ## Review Checklist
 
@@ -38,7 +39,7 @@ For each item, rate as PASS, WEAK, or FAIL:
 - [ ] Is it clear who experiences this problem and how?
 
 ### Persona Connection
-- [ ] Is there a real persona attached (file in `docs/personas/`), not a generic "user"?
+- [ ] Is there a real persona attached (referenced via `[REF persona:slug]`), not a generic "user"?
 - [ ] Does the problem actually affect this persona based on their profile?
 
 ### Evidence
