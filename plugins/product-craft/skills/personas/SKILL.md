@@ -10,8 +10,9 @@ Create, maintain, and reference user personas for your product. Personas are gro
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/personas/` to know which personas already exist
-2. Note the `Last updated` date on each — if any are older than 3 months, you'll flag them
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `persona` — this reads from the configured destination (local files or MCP).
+3. Note the `Last updated` date on each — if any are older than 3 months, you'll flag them.
 
 ## Entry Point
 
@@ -49,40 +50,34 @@ Present the research findings (if available) to the user and ask them to validat
 
 ### Overlap detection
 
-If during the conversation the described persona significantly overlaps with an existing one in `docs/personas/`, flag it: *"This sounds very similar to [existing persona]. Should we update that one instead, or is this genuinely a different user type?"*
+If during the conversation the described persona significantly overlaps with an existing persona (from the artifacts loaded during Context Loading), flag it: *"This sounds very similar to [existing persona]. Should we update that one instead, or is this genuinely a different user type?"*
 
 ## Output
 
-Write the persona to `docs/personas/<role-slug>.md` using this format:
+Produce the persona as a structured artifact block:
 
-```markdown
-# [Role Name]
-
-## Who they are
-[Role, title, organization type, reporting structure, team context]
-
-## Their day-to-day
-[Typical workflow, what they spend time on, their rhythm]
-
-## Pain points
-- [Pain point 1]
-- [Pain point 2]
-- [Pain point 3]
-
-## Goals
-- [What success looks like]
-- [How they're measured]
-
-## Relationship with Clear NDR
-[How they use it, what they value, what they wish was different]
-
-## Quotes
-<!-- Real quotes from user research, or synthesized from research findings -->
-- "[Quote that captures their perspective]"
-- "[Quote that captures a frustration]"
-
-## Last updated: YYYY-MM-DD
 ```
+[ARTIFACT type:persona slug:<role-slug> title:"<Role Name>"]
+[SECTION "Who they are"]
+Role, title, organization type, reporting structure, team context
+[SECTION "Their day-to-day"]
+Typical workflow, what they spend time on, their rhythm
+[SECTION "Pain points"]
+- Pain point 1
+- Pain point 2
+- Pain point 3
+[SECTION "Goals"]
+- What success looks like
+- How they're measured
+[SECTION "Relationship with Clear NDR"]
+How they use it, what they value, what they wish was different
+[SECTION "Quotes"]
+- "Quote that captures their perspective"
+- "Quote that captures a frustration"
+[/ARTIFACT]
+```
+
+The output layer reads `product-craft.json` and writes this to the configured destination — local markdown file, wiki page, or other target. For local files, this renders to `{basePath}/personas/<role-slug>.md` in the same markdown format as before.
 
 After writing, confirm with the user: *"Here's the persona I've created. Want to adjust anything?"*
 

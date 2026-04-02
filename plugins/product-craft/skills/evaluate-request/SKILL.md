@@ -10,9 +10,10 @@ Take a customer request, sales ask, or internal idea and rigorously assess wheth
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/personas/` to know existing user types
-2. Read `docs/strategy/product-strategy.md` if it exists, for strategic alignment context
-3. Read recent files in `docs/research/` and `docs/pitches/` to check if this request overlaps with existing work
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `persona`.
+3. Use the output layer to read the artifact `strategy:product-strategy` if it exists.
+4. Use the output layer to list all artifacts of type `research` and `pitch` to check for overlapping work.
 
 ## Entry Point
 
@@ -32,11 +33,11 @@ Ask questions **one at a time, conversationally**.
    *"That sounds like a solution. What problem is the customer trying to solve? What are they unable to do today?"*
    Keep asking until you get to the real problem. This is critical.
 4. **Pattern or one-off** — "Have other customers or prospects asked for something similar? Has this come up in support tickets?"
-5. **Strategic alignment** — Compare against `docs/strategy/product-strategy.md` if it exists. Does this fit current themes?
+5. **Strategic alignment** — Compare against the product strategy artifact loaded during Context Loading. Does this fit current themes?
 
 ### Overlap detection
 
-Check if `docs/research/` or `docs/pitches/` already covers this:
+Check if the research or pitch artifacts loaded during Context Loading already cover this:
 - If a discovery brief exists → *"We already investigated this problem on [date]. Here's what we found: [summary]. Does this request add new information?"*
 - If a pitch exists → *"There's already a pitch covering this: [title]. Does this request change anything about it?"*
 
@@ -62,24 +63,20 @@ Based on scoring, recommend one of:
 
 ## Output
 
-Write to `docs/research/eval-YYYY-MM-DD-<topic-slug>.md`:
+Produce the evaluation as a structured artifact block:
 
-```markdown
-# Evaluation: [Request Summary]
-
-## Original request
-[What was asked for, verbatim if possible]
-
-## Source & context
-[Who asked, when, in what context, what's at stake]
-
-## Underlying problem (reframed)
-[The real problem behind the request — in user terms]
-
-## Affected personas
-[Links to persona files, or note if no persona matches]
-
-## Score
+```
+[ARTIFACT type:evaluation slug:<topic-slug> title:"Evaluation: <Request Summary>" date:<YYYY-MM-DD>]
+[SECTION "Original request"]
+What was asked for, verbatim if possible
+[SECTION "Source & context"]
+Who asked, when, in what context, what's at stake
+[SECTION "Underlying problem (reframed)"]
+The real problem behind the request — in user terms
+[SECTION "Affected personas"]
+Which personas match, or note if none
+[REF persona:<slug>]
+[SECTION "Score"]
 | Dimension | Rating | Notes |
 |-----------|--------|-------|
 | Strategic fit | | |
@@ -87,14 +84,14 @@ Write to `docs/research/eval-YYYY-MM-DD-<topic-slug>.md`:
 | Evidence strength | | |
 | Effort signal | | |
 | Opportunity cost | | |
-
-## Verdict: [Investigate / Shape / Park / Decline]
-
-## Reasoning
-[Why this verdict, what would change it]
-
-## Last updated: YYYY-MM-DD
+[SECTION "Verdict"]
+Investigate / Shape / Park / Decline
+[SECTION "Reasoning"]
+Why this verdict, what would change it
+[/ARTIFACT]
 ```
+
+The output layer writes this to the configured destination. For local files, this renders to `{basePath}/research/eval-{date}-{slug}.md`.
 
 ## Contextual Handoffs
 

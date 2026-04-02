@@ -10,13 +10,14 @@ Step back from individual bets and think about the big picture. Where is Clear N
 ## Context Loading
 
 Before asking anything, silently load everything:
-1. `docs/strategy/product-strategy.md` — current strategy if it exists
-2. `docs/competitors/` — all competitor profiles
-3. `docs/personas/` — all personas
-4. `docs/pitches/` — all pitches (note their statuses)
-5. `docs/research/` — all research briefs and discovery briefs
-6. `docs/company/core-values.md`, `docs/company/brand.md`, `docs/company/strategy.md` — company-level context
-7. Check `Last updated` dates on everything — flag stale artifacts
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to read the artifact `strategy:product-strategy` if it exists.
+3. Use the output layer to list and read all artifacts of type `competitor`.
+4. Use the output layer to list and read all artifacts of type `persona`.
+5. Use the output layer to list and read all artifacts of type `pitch` (note their statuses).
+6. Use the output layer to list and read all artifacts of type `research`.
+7. Read company-level context: use the output layer to read artifacts from the `company` category (core-values, brand, strategy) if they exist.
+8. Check `Last updated` dates on everything — flag stale artifacts.
 
 ## Entry Point
 
@@ -38,7 +39,7 @@ This is a high-level, conversational process. Ask questions **one at a time**.
 
 4. **Current weaknesses** — "Where do we fall short? What do customers ask for that we can't deliver? Where do competitors beat us?"
 
-5. **Existing bets and pitches** — Review what's in `docs/pitches/`. *"We have these pitches in various stages: [list]. Do they still feel right? Any that should be dropped? Any gaps?"*
+5. **Existing bets and pitches** — Review the pitch artifacts loaded during Context Loading. *"We have these pitches in various stages: [list]. Do they still feel right? Any that should be dropped? Any gaps?"*
 
 ### Strategic framework
 
@@ -103,49 +104,40 @@ Document what you're not doing and why. This is as important as what you are doi
 
 ## Output
 
-Write to or update `docs/strategy/product-strategy.md`:
+Produce or update the strategy as a structured artifact block:
 
-```markdown
-# Product Strategy
-
-## Last updated: YYYY-MM-DD
-## Time horizon: [period]
-
-## Positioning
-[How Clear NDR wins — our unique angle in the market.
-Not a tagline — a clear statement of why customers choose us over alternatives.]
-
-## Strategic themes
-
+```
+[ARTIFACT type:strategy slug:product-strategy title:"Product Strategy" date:<YYYY-MM-DD>]
+[SECTION "Positioning"]
+How Clear NDR wins — our unique angle in the market.
+Not a tagline — a clear statement of why customers choose us over alternatives.
+[SECTION "Strategic themes"]
 ### Theme 1: [Name]
-**Why this matters:** [Evidence-based rationale]
-**Supporting evidence:** [Links to research, competitor profiles, discovery briefs]
+**Why this matters:** Evidence-based rationale
+**Supporting evidence:** Links to research, competitor profiles, discovery briefs
+[REF research:<slug>]
+[REF competitor:<slug>]
 **Key bets in this theme:**
-- [Pitch title] (status) — link to docs/pitches/...
-- [Pitch title] (status) — link to docs/pitches/...
-**Gaps:** [What still needs to be shaped or researched]
+- Pitch title (status)
+[REF pitch:<slug>]
+**Gaps:** What still needs to be shaped or researched
 
 ### Theme 2: [Name]
-**Why this matters:** [Evidence-based rationale]
-**Supporting evidence:** [Links]
-**Key bets in this theme:**
-- [Pitch title] (status)
-**Gaps:** [What still needs work]
-
-### Theme 3: [Name]
 ...
-
-## What we're NOT doing (and why)
-- [Deliberate trade-off 1] — [Why we're choosing not to pursue this now]
-- [Deliberate trade-off 2] — [Why]
-
-## Key risks
-- [Strategic risk 1] — [How we're watching it, what would change our mind]
-- [Strategic risk 2] — [How we're watching it]
-
-## Inputs
-[Links to competitor profiles, research briefs, discovery briefs, and pitches that informed this strategy]
+[SECTION "What we're NOT doing (and why)"]
+- Deliberate trade-off 1 — Why we're choosing not to pursue this now
+- Deliberate trade-off 2 — Why
+[SECTION "Key risks"]
+- Strategic risk 1 — How we're watching it, what would change our mind
+[SECTION "Inputs"]
+Links to artifacts that informed this strategy.
+[REF competitor:<slug>]
+[REF research:<slug>]
+[REF persona:<slug>]
+[/ARTIFACT]
 ```
+
+The output layer writes this to the configured destination. For local files, this renders to `{basePath}/strategy/product-strategy.md`.
 
 After writing: *"Strategy updated. Here's a summary of the themes and trade-offs. Does this capture where we're heading?"*
 

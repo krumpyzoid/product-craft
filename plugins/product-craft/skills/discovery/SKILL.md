@@ -14,9 +14,10 @@ Validate whether a problem is real, worth solving, and for whom. This skill is d
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/personas/` to know which user types are defined
-2. Read all files in `docs/research/` to check for existing research on this topic
-3. Read `docs/strategy/product-strategy.md` if it exists, for strategic context
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `persona`.
+3. Use the output layer to list all artifacts of type `research` to check for existing research on this topic.
+4. Use the output layer to read the artifact `strategy:product-strategy` if it exists.
 
 ## Entry Point
 
@@ -33,7 +34,7 @@ Ask questions **one at a time, conversationally**. Be curious but rigorous.
 Track what you have and what's missing. Tell the user explicitly: *"I still need to understand: [missing items]."*
 
 1. **Trigger** — What started this investigation? (already asked at entry)
-2. **Who has this problem** — "Which of our users experiences this?" Present existing personas from `docs/personas/`. If the user describes someone new: *"This sounds like a user type we haven't captured yet. Let's note that — we may want to create a persona for them."*
+2. **Who has this problem** — "Which of our users experiences this?" Present existing personas loaded during Context Loading. If the user describes someone new: *"This sounds like a user type we haven't captured yet. Let's note that — we may want to create a persona for them."*
 3. **Problem in user terms** — "Describe the problem from the user's perspective. Not what's technically wrong — what is the person trying to do, and what's blocking them or making it painful?"
 4. **Current workaround** — "How do they cope today? Do they use another tool? A manual process? Do they just suffer through it?"
 5. **Frequency and severity** — "How often does this happen? And when it does, how bad is it? Minor annoyance or blocks their work?"
@@ -87,27 +88,22 @@ Present the score to the user: *"Based on what we've discussed, here's how I'd r
 
 ## Output
 
-Write to `docs/research/discovery-YYYY-MM-DD-<topic-slug>.md`:
+Produce the discovery brief as a structured artifact block:
 
-```markdown
-# Discovery: [Problem Statement — in user terms]
-
-## Trigger
-[What started this investigation]
-
-## Affected personas
-[Links to persona files, or description of new user type if no persona exists yet]
-
-## Problem description
-[The problem from the user's perspective — what they're trying to do, what's blocking them, how it feels]
-
-## Current workarounds
-[How users cope today]
-
-## Evidence
-[All evidence gathered — customer quotes, support tickets, research findings, competitive context]
-
-## Problem score
+```
+[ARTIFACT type:discovery slug:<topic-slug> title:"Discovery: <Problem Statement>" date:<YYYY-MM-DD>]
+[SECTION "Trigger"]
+What started this investigation
+[SECTION "Affected personas"]
+Which personas are affected and why
+[REF persona:<slug>]
+[SECTION "Problem description"]
+The problem from the user's perspective — what they're trying to do, what's blocking them, how it feels
+[SECTION "Current workarounds"]
+How users cope today
+[SECTION "Evidence"]
+All evidence gathered — customer quotes, support tickets, research findings, competitive context
+[SECTION "Problem score"]
 | Dimension | Rating (1-5) | Notes |
 |-----------|:---:|-------|
 | Frequency | | |
@@ -116,20 +112,14 @@ Write to `docs/research/discovery-YYYY-MM-DD-<topic-slug>.md`:
 | Trend | | |
 
 **Total: [sum]/20**
-
-## What happens if we don't solve this
-[Consequences for users and for the business]
-
-## Recommended next step
-<!-- One of: -->
-<!-- - Shape a bet (score >= 12, strong evidence) -->
-<!-- - More research needed (score uncertain, weak evidence) -->
-<!-- - Park it (score < 8, limited evidence) -->
-<!-- - Decline (not our problem to solve) -->
-[Recommendation with reasoning]
-
-## Last updated: YYYY-MM-DD
+[SECTION "What happens if we don't solve this"]
+Consequences for users and for the business
+[SECTION "Recommended next step"]
+Recommendation with reasoning (Shape a bet / More research / Park it / Decline)
+[/ARTIFACT]
 ```
+
+The output layer writes this to the configured destination. For local files, this renders to `{basePath}/research/discovery-{date}-{slug}.md`.
 
 ## Contextual Handoffs
 

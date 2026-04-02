@@ -10,9 +10,10 @@ Build and maintain deep competitor profiles. Combines web research with internal
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/competitors/` to know which competitors already have profiles
-2. Read `docs/strategy/product-strategy.md` if it exists, to understand current positioning
-3. Note `Last updated` dates — flag profiles older than 3 months
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `competitor` — this reads from the configured destination.
+3. Use the output layer to read the artifact `strategy:product-strategy` if it exists, to understand current positioning.
+4. Note `Last updated` dates — flag profiles older than 3 months.
 
 ## Entry Point
 
@@ -53,56 +54,49 @@ After web research, fill gaps with internal knowledge:
 
 ## Output
 
-Write the profile to `docs/competitors/<competitor-slug>.md`:
+Produce the profile as a structured artifact block:
 
-```markdown
-# [Competitor Name]
-
-## Overview
-[Who they are, founding, market position, key facts]
-
-## Product & Technology
-[What they sell, how it works, detection approach, deployment model]
-
-## Target market
-[Who they sell to, verticals, company sizes]
-
-## Pricing model
-[How they charge — per endpoint, per GB, flat rate, etc. Note if this is public or estimated]
-
-## Strengths (from their perspective)
-- [What they're genuinely good at]
-- [What their marketing emphasizes]
-
-## Weaknesses (from our perspective + market evidence)
-- [Where they fall short]
-- [What customers complain about]
-
-## How they position against us
-[How they differentiate from us in their messaging]
-
-## How we win against them
-- [Competitive advantage 1]
-- [Competitive advantage 2]
-
-## How we lose against them
-- [Where they beat us]
-- [What we're missing]
-
-## Recent moves
-- [Acquisition, partnership, product launch, funding — with dates]
-
-## Last updated: YYYY-MM-DD
 ```
+[ARTIFACT type:competitor slug:<competitor-slug> title:"<Competitor Name>"]
+[SECTION "Overview"]
+Who they are, founding, market position, key facts
+[SECTION "Product & Technology"]
+What they sell, how it works, detection approach, deployment model
+[SECTION "Target market"]
+Who they sell to, verticals, company sizes
+[SECTION "Pricing model"]
+How they charge — per endpoint, per GB, flat rate, etc. Note if public or estimated
+[SECTION "Strengths (from their perspective)"]
+- What they're genuinely good at
+- What their marketing emphasizes
+[SECTION "Weaknesses (from our perspective + market evidence)"]
+- Where they fall short
+- What customers complain about
+[SECTION "How they position against us"]
+How they differentiate from us in their messaging
+[SECTION "How we win against them"]
+- Competitive advantage 1
+- Competitive advantage 2
+[SECTION "How we lose against them"]
+- Where they beat us
+- What we're missing
+[SECTION "Recent moves"]
+- Acquisition, partnership, product launch, funding — with dates
+[/ARTIFACT]
+```
+
+The output layer writes this to the configured destination.
 
 ### Comparison output
 
-For comparisons, write to `docs/competitors/comparison-<a>-vs-<b>.md`:
+For comparisons, produce a structured artifact block:
 
-```markdown
-# Comparison: [Competitor A] vs [Competitor B]
-
-| Dimension | [A] | [B] | Clear NDR |
+```
+[ARTIFACT type:comparison slug:<a>-vs-<b> title:"Comparison: <A> vs <B>"]
+[REF competitor:<a-slug>]
+[REF competitor:<b-slug>]
+[SECTION "Comparison"]
+| Dimension | <A> | <B> | Clear NDR |
 |-----------|-----|-----|-----------|
 | Detection approach | | | |
 | Deployment model | | | |
@@ -110,11 +104,9 @@ For comparisons, write to `docs/competitors/comparison-<a>-vs-<b>.md`:
 | Target market | | | |
 | Key strength | | | |
 | Key weakness | | | |
-
-## Analysis
-[Where each has an advantage, and what this means for Clear NDR's positioning]
-
-## Last updated: YYYY-MM-DD
+[SECTION "Analysis"]
+Where each has an advantage, and what this means for Clear NDR's positioning
+[/ARTIFACT]
 ```
 
 ## Contextual Handoffs

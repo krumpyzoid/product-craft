@@ -14,15 +14,16 @@ Write user stories that express need and impact from the user's perspective, not
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/personas/` to know available personas
-2. Read recent files in `docs/research/` (discovery briefs and evaluations) for problem context
-3. If invoked from `/shape-bet`, note which pitch this story belongs to
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `persona`.
+3. Use the output layer to list all artifacts of type `research` (discovery briefs and evaluations) for problem context.
+4. If invoked from `/shape-bet`, note which pitch this story belongs to.
 
 ## Entry Point
 
 Present existing personas: *"Which persona is this story for?"*
 
-List the personas from `docs/personas/` with a one-line summary of each. If the user names someone that doesn't match an existing persona, offer to create one: *"We don't have a persona for [user type]. Want to define one first? It'll make the story stronger."*
+List the personas loaded during Context Loading with a one-line summary of each. If the user names someone that doesn't match an existing persona, offer to create one: *"We don't have a persona for [user type]. Want to define one first? It'll make the story stronger."*
 
 ## Story Building Flow
 
@@ -31,7 +32,7 @@ Ask questions **one at a time, conversationally**. Build the story incrementally
 ### Required information (completeness gate)
 
 1. **Persona** — Which specific persona? (from entry point)
-2. **Problem context** — "What problem does this story address?" Check if a discovery brief or evaluation exists in `docs/research/`. If so, reference it. If not: *"We don't have a validated problem for this yet. Is this based on a known pain point, or should we validate first?"*
+2. **Problem context** — "What problem does this story address?" Check if a discovery brief or evaluation exists among the research artifacts loaded during Context Loading. If so, reference it. If not: *"We don't have a validated problem for this yet. Is this based on a known pain point, or should we validate first?"*
 3. **User goal** — "What is this person trying to accomplish? Not what feature they want — what are they trying to DO?"
 4. **Impact** — "When this works, what changes for them? How is their day better?"
 5. **Current state** — "What do they do today without this? What's the workaround or pain?"
@@ -63,27 +64,27 @@ Acceptance criteria must be **observable outcomes**, not implementation details:
 
 ### Standalone stories
 
-Write to `docs/pitches/stories/YYYY-MM-DD-<title-slug>.md`:
+Produce the story as a structured artifact block:
 
-```markdown
-## User Story: [Short title in user terms]
-**Persona:** [Link to docs/personas/<persona>.md]
-**Problem:** [Link to docs/research/<brief>.md if exists]
-
+```
+[ARTIFACT type:story slug:<title-slug> title:"User Story: <Short title>" date:<YYYY-MM-DD>]
+[REF persona:<persona-slug>]
+[REF research:<brief-slug>]
+[SECTION "Story"]
 As a [persona name and role],
 I want to [goal in their language]
 so that [impact on their work].
-
-### Acceptance criteria
-- [ ] [Observable outcome from the user's perspective]
-- [ ] [Observable outcome from the user's perspective]
-
-### What they do today
-[Current workaround or pain — how they cope without this]
-
-### What changes for them
-[The "after" — how their experience improves, in concrete terms]
+[SECTION "Acceptance criteria"]
+- [ ] Observable outcome from the user's perspective
+- [ ] Observable outcome from the user's perspective
+[SECTION "What they do today"]
+Current workaround or pain — how they cope without this
+[SECTION "What changes for them"]
+The "after" — how their experience improves, in concrete terms
+[/ARTIFACT]
 ```
+
+The output layer writes this to the configured destination. For local files, this renders to `{basePath}/pitches/stories/{date}-{slug}.md`.
 
 ### Stories within a pitch
 

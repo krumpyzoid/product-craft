@@ -10,9 +10,10 @@ Research industry trends, market dynamics, and where the NDR/network security sp
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/research/` to know what research already exists
-2. Read `docs/strategy/product-strategy.md` if it exists, to understand current strategic context
-3. Read `docs/competitors/` to know the competitive landscape context
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `research` — this reads from the configured destination.
+3. Use the output layer to read the artifact `strategy:product-strategy` if it exists.
+4. Use the output layer to list all artifacts of type `competitor` for competitive landscape context.
 
 ## Entry Point
 
@@ -32,7 +33,7 @@ Ask these questions **one at a time, conversationally**.
 
 ### Overlap check
 
-Before starting research, check if `docs/research/` already has a brief covering this topic. If so: *"We already have research on [topic] from [date]. Want to build on that, or is this a different angle?"*
+Before starting research, check if the research artifacts loaded during Context Loading already cover this topic. If so: *"We already have research on [topic] from [date]. Want to build on that, or is this a different angle?"*
 
 ### Web research
 
@@ -57,42 +58,31 @@ After receiving research results:
 
 ## Output
 
-Write to `docs/research/YYYY-MM-DD-<topic-slug>.md`:
+Produce the research brief as a structured artifact block:
 
-```markdown
-# [Topic]
-
-## Research question
-[The specific question this brief answers]
-
-## Key findings
-- [Finding 1]
-- [Finding 2]
-- [Finding 3]
-
-## Evidence
-### [Sub-topic 1]
-[Detailed findings with source citations]
-
-### [Sub-topic 2]
-[Detailed findings with source citations]
-
-## What this means for Clear NDR
-[Implications for our product — opportunities, threats, gaps]
-
-## Open questions
-- [What we still don't know]
-- [Where data was thin or conflicting]
-
-## Recommended next steps
-- [Action 1 — e.g., deeper research on X, discovery session on Y, competitor analysis on Z]
-
-## Sources
-- [URL] — [description, date]
-- [URL] — [description, date]
-
-## Last updated: YYYY-MM-DD
 ```
+[ARTIFACT type:research slug:<topic-slug> title:"<Topic>" date:<YYYY-MM-DD>]
+[SECTION "Research question"]
+The specific question this brief answers
+[SECTION "Key findings"]
+- Finding 1
+- Finding 2
+- Finding 3
+[SECTION "Evidence"]
+Detailed findings organized by sub-topic with source citations
+[SECTION "What this means for Clear NDR"]
+Implications for our product — opportunities, threats, gaps
+[SECTION "Open questions"]
+- What we still don't know
+- Where data was thin or conflicting
+[SECTION "Recommended next steps"]
+- Action 1
+[SECTION "Sources"]
+- URL — description, date
+[/ARTIFACT]
+```
+
+The output layer writes this to the configured destination. For local files, this renders to `{basePath}/research/{date}-{slug}.md`.
 
 ## Contextual Handoffs
 

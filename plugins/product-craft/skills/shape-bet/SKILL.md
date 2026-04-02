@@ -7,7 +7,7 @@ description: Shape a validated problem into a Shape Up pitch with clear boundari
 
 Shape a validated problem into a Shape Up pitch. This is where everything converges — personas, discovery, competitor analysis, and strategy come together into a concrete proposal for the betting table.
 
-Read `plugins/product-craft/references/shape-up-primer.md` for methodology reference. Use `plugins/product-craft/references/pitch-template.md` as the output structure.
+Read the shape-up-primer and pitch-template references from the plugin's `references/` directory for methodology and output structure guidance.
 
 ## The Rules
 
@@ -20,13 +20,13 @@ Read `plugins/product-craft/references/shape-up-primer.md` for methodology refer
 ## Context Loading
 
 Before asking anything, silently:
-1. Read all files in `docs/personas/`
-2. Read all files in `docs/research/` (discovery briefs and evaluations)
-3. Read all files in `docs/competitors/`
-4. Read `docs/strategy/product-strategy.md` if it exists
-5. Read existing pitches in `docs/pitches/` to avoid duplication
-6. Read `plugins/product-craft/references/shape-up-primer.md`
-7. Read `plugins/product-craft/references/pitch-template.md`
+1. Read `product-craft.json` from the project root. If it does not exist, follow the Auto-Detection flow from the output-layer skill before proceeding.
+2. Use the output layer to list all artifacts of type `persona`.
+3. Use the output layer to list all artifacts of type `research` (discovery briefs and evaluations).
+4. Use the output layer to list all artifacts of type `competitor`.
+5. Use the output layer to read the artifact `strategy:product-strategy` if it exists.
+6. Use the output layer to list all artifacts of type `pitch` to avoid duplication.
+7. Read the plugin's `references/shape-up-primer.md` and `references/pitch-template.md`.
 
 ## Entry Point
 
@@ -40,7 +40,7 @@ Ask questions **one at a time, conversationally**. This is a rigorous process �
 
 ### Conflict detection
 
-After loading `docs/strategy/product-strategy.md`, check whether the problem being shaped conflicts with the "What we're NOT doing" section. If it does, surface this as a blocker:
+After loading the product strategy artifact, check whether the problem being shaped conflicts with the "What we're NOT doing" section. If it does, surface this as a blocker:
 
 *"Hold on — our product strategy explicitly says we're NOT doing [X]. This bet is about [Y], which seems to conflict. Before we continue, we need to resolve this: has the strategy changed, or should this bet be reframed to avoid the conflict?"*
 
@@ -63,7 +63,7 @@ Track each item. Tell the user what's still missing.
 
 1. **Problem statement** — In user terms, with evidence. Must reference a persona. Must have evidence beyond opinion.
 
-2. **Personas affected** — Which specific personas from `docs/personas/`? If none match: *"This doesn't map to any of our defined personas. Either we need a new persona, or this problem isn't in our target market."*
+2. **Personas affected** — Which specific personas from the artifacts loaded during Context Loading? If none match: *"This doesn't map to any of our defined personas. Either we need a new persona, or this problem isn't in our target market."*
 
 3. **Appetite** — *"How much time is this worth to us? Not how long will it take — how much would we invest to solve this?"*
    - Guide the user: *"In Shape Up, appetite is a budget. A 1-week small batch for minor improvements, 2-week small batch for moderate changes, or 6-week big batch for significant features. If it can't fit in 6 weeks, we need to cut scope."*
@@ -104,7 +104,37 @@ If scopes need user stories: *"Want to write user stories for these scopes?"* �
 
 ## Output
 
-Write to `docs/pitches/YYYY-MM-DD-<title-slug>.md` using the format from `plugins/product-craft/references/pitch-template.md`. Always set status to **Draft**.
+Produce the pitch as a structured artifact block. Use the sections from the pitch-template reference:
+
+```
+[ARTIFACT type:pitch slug:<title-slug> title:"Pitch: <Title>" date:<YYYY-MM-DD> status:Draft]
+[SECTION "Problem"]
+Problem in user terms with evidence. Link to discovery brief if exists.
+[REF discovery:<slug>]
+[SECTION "Personas affected"]
+Which personas and why.
+[REF persona:<slug>]
+[SECTION "Appetite"]
+Time budget and reasoning.
+[SECTION "Solution sketch"]
+Rough concept — breadboards and fat-marker sketches in words.
+[SECTION "Rabbit holes"]
+- Risk: description and how to cap it
+[SECTION "No-gos"]
+- What's excluded and why
+[SECTION "Scopes"]
+### Scope 1: [Name in user terms]
+What this covers, why it's independent. What would the user see when done?
+### Scope 2: [Name in user terms]
+What this covers.
+[SECTION "Evidence"]
+Customer conversations, support patterns, research findings, competitive context.
+[REF research:<slug>]
+[REF competitor:<slug>]
+[/ARTIFACT]
+```
+
+Always set status to **Draft**. The output layer writes this to the configured destination.
 
 After writing the pitch, tell the user: *"Pitch drafted. Now let me have it reviewed."*
 
@@ -113,7 +143,7 @@ After writing the pitch, tell the user: *"Pitch drafted. Now let me have it revi
 Dispatch the **bet-reviewer agent**:
 
 Use the Agent tool with `subagent_type: "product-craft:bet-reviewer"` and a prompt like:
-> "Review the pitch at docs/pitches/YYYY-MM-DD-<title>.md. Read the referenced persona files and any linked discovery briefs. Check it against the review checklist in your instructions."
+> "Review the pitch titled '[title]' that was just created. Read the referenced persona and research artifacts. Check it against the review checklist in your instructions."
 
 Present the review to the user: *"Here's the review. Let's discuss any issues and refine the pitch."*
 
